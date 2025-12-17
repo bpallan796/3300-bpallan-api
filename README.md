@@ -1,48 +1,61 @@
-# 3300 - Salary Prediction Model API
+💼 Salary Prediction Model API (BAIS 3300)
 
-![Python badge](https://img.shields.io/static/v1?message=python&logo=python&labelColor=5c5c5c&color=3776AB&logoColor=white&label=%20&style=for-the-badge) ![Flask badge](https://img.shields.io/static/v1?message=Flask&logo=Flask&labelColor=5c5c5c&color=000000&logoColor=white&label=%20&style=for-the-badge)
 
-This application uses Python [Flask](https://flask.palletsprojects.com/en/3.0.x/) to make the machine learning model available to users.
 
-The API is not a complete implementation. It does not account for error handling yet.
 
-The idea for this project came from [Predicting Year of Marriage - End to End Machine Learning Deployment with FLASK and AWS -PART 1](https://www.youtube.com/watch?v=sm5xeKal72I). I adapted to a data science salary prediction model and Microsoft Azure for purposes of teaching.
 
-## To Run This Application  
 
-1. Clone this repository to local computer
 
-2. Create a new virtual environment
 
-   - Windows: `python -m venv ./venv`
-   - Mac: `python3 -m venv ./venv`
+This project is a machine learning salary prediction API built with Python and Flask.
+It exposes a trained regression model through a RESTful API endpoint that returns predicted salaries based on demographic and professional inputs.
 
-3. Activate the new virtual environment
+The project demonstrates skills in:
 
-   - Windows: `.\venv\Scripts\activate`
-   - Mac: `source ./venv/bin/activate`
+Data preprocessing
 
-4. Install the dependencies `pip install -r requirements.txt`
+Machine learning model deployment
 
-5. Run the application with `flask run`
-   a. To run a specific app: `flask --app app run`  
-   b. To change the port: `flask run --port 8080`  
-   c. To listen on all public IP addresses: `flask run --host 0.0.0.0`
-   d. To run in debug mode: `flask run --debug`
+API development
 
-   Example: `flask --app app run --port 8080 --debug `
+Backend testing using Postman
 
-## API endpoints
+🚀 Project Overview
 
-**/**  
-Send a GET request to the root route to learn about the api
+The API accepts JSON input representing encoded categorical variables such as age group, education level, job title, and company size, and returns a predicted annual salary.
 
-**/predict**  
-Send a POST request with JSON data to the /predict route to recieve back a salary prediction in JSON format {"predicted\_salary": 00000.00}. Required data includes labels for categorical variables _age, gender, country, highest_deg, coding_exp, title_, and _company\_size_. Data must be sent in this order.
+This project was adapted from a tutorial on end-to-end ML deployment and customized for:
 
-### Example JSON
+Data science salary data
 
-```json
+Microsoft Azure deployment concepts
+
+BAIS 3300 instructional purposes
+
+📌 Note: This is a teaching-focused implementation and does not yet include full production-level error handling.
+
+🧠 Model & Data
+
+Model type: Regression
+
+Target: Annual salary
+
+Features: Age, gender, country, education level, coding experience, job title, company size
+
+Data: Encoded categorical variables derived from survey-style inputs
+
+📡 API Endpoints
+/
+
+Method: GET
+Returns basic information about the API.
+
+/predict
+
+Method: POST
+Returns a salary prediction based on input features.
+
+Required JSON Format
 {
   "age": 7,
   "gender": 0,
@@ -52,43 +65,126 @@ Send a POST request with JSON data to the /predict route to recieve back a salar
   "title": 13,
   "company_size": 2
 }
-```
-  
-    
-## To Do List
 
-[ ] :pencil2:  Add error handling  
-[ ] :pencil2:  Add application logging    
-[ ] :pencil2:  Add /api/v1 url path  
+Example Response
+{
+  "predicted_salary": 95679.58
+}
 
 
+📌 Important:
+All values must be numerical encodings and sent in the correct structure.
 
-  
-## Categorical variable mappings
+🛠️ How to Run This Project Locally
+1️⃣ Clone the Repository
+git clone https://github.com/bpallan796/3300-bpallan-api.git
+cd 3300-bpallan-api
 
-**_age mapping_**  
-{0: '18-21', 1: '22-24', 2: '25-29', 3: '30-34', 4: '35-39', 5: '40-44', 6: '45-49', 7: '50-54', 8: '55-59', 9: '60-69', 10: '70+'}
+2️⃣ Create a Virtual Environment
 
-**_gender mapping_**  
-{0: 'Man', 1: 'Nonbinary', 2: 'Prefer not to say', 3: 'Prefer to self-describe', 4: 'Woman'}
+Windows
 
-**_country mapping_**  
-{0: 'Algeria', 1: 'Argentina', 2: 'Australia', 3: 'Bangladesh', 4: 'Belgium', 5: 'Brazil', 6: 'Cameroon', 7: 'Canada', 8: 'Chile', 9: 'China', 10: 'Colombia', 11: 'Czech Republic', 12: 'Ecuador', 13: 'Egypt', 14: 'Ethiopia', 15: 'France', 16: 'Germany', 17: 'Ghana', 18: 'Hong Kong (S.A.R.)', 19: 'I do not wish to disclose my location', 20: 'India', 21: 'Indonesia', 22: 'Iran, Islamic Republic of...', 23: 'Ireland', 24: 'Israel', 25: 'Italy', 26: 'Japan', 27: 'Kenya', 28: 'Malaysia', 29: 'Mexico', 30: 'Morocco', 31: 'Nepal', 32: 'Netherlands', 33: 'Nigeria', 34: 'Other', 35: 'Pakistan', 36: 'Peru', 37: 'Philippines', 38: 'Poland', 39: 'Portugal', 40: 'Romania', 41: 'Russia', 42: 'Saudi Arabia', 43: 'Singapore', 44: 'South Africa', 45: 'South Korea', 46: 'Spain', 47: 'Sri Lanka', 48: 'Taiwan', 49: 'Thailand', 50: 'Tunisia', 51: 'Turkey', 52: 'Ukraine', 53: 'United Arab Emirates', 54: 'United Kingdom of Great Britain and Northern Ireland', 55: 'United States of America', 56: 'Viet Nam', 57: 'Zimbabwe'}
+python -m venv venv
 
-**_highest_deg mapping_**  
-{0: 'Bachelor’s degree', 1: 'Doctoral degree', 2: 'I prefer not to answer', 3: 'Master’s degree', 4: 'No formal education past high school', 5: 'Professional doctorate', 6: 'Some college/university study without earning a bachelor’s degree'}
 
-**_code_experience mapping_**  
-{0: '1-3 years', 1: '10-20 years', 2: '20+ years', 3: '3-5 years', 4: '5-10 years', 5: '< 1 years', 6: 'I have never written code'}
+Mac
 
-**_current_title mapping_**  
-{0: 'Data Administrator', 1: 'Data Analyst (Business, Marketing, Financial, Quantitative, etc)', 2: 'Data Architect', 3: 'Data Engineer', 4: 'Data Scientist', 5: 'Developer Advocate', 6: 'Engineer (non-software)', 7: 'Machine Learning/ MLops Engineer', 8: 'Manager (Program, Project, Operations, Executive-level, etc)', 9: 'Other', 10: 'Research Scientist', 11: 'Software Engineer', 12: 'Statistician', 13: 'Teacher / professor'}
+python3 -m venv venv
 
-**_company_size mapping_**  
-{0: '0-49 employees', 1: '10,000 or more employees', 2: '1000-9,999 employees', 3: '250-999 employees', 4: '50-249 employees'}
+3️⃣ Activate the Environment
 
-## Sample data  
+Windows
 
-If using mc_salary_predict_model.ml, with the variables 7, 0, 55, 3, 4, 13, and 2 should return a predicted salary of 95679.58.
+.\venv\Scripts\activate
 
-![Postman screenshot](postman_test.png)
+
+Mac
+
+source venv/bin/activate
+
+4️⃣ Install Dependencies
+pip install -r requirements.txt
+
+5️⃣ Run the Flask App
+flask run
+
+
+Optional flags:
+
+--debug → debug mode
+
+--port 8080 → custom port
+
+--host 0.0.0.0 → public access
+
+Example:
+
+flask --app app run --port 8080 --debug
+
+🧪 Testing the API
+
+The API was tested using Postman to send POST requests to /predict.
+
+📸 Example test result:
+
+📋 Categorical Variable Mappings
+Age
+0: 18–21
+1: 22–24
+2: 25–29
+3: 30–34
+4: 35–39
+5: 40–44
+6: 45–49
+7: 50–54
+8: 55–59
+9: 60–69
+10: 70+
+
+Gender
+0: Man
+1: Nonbinary
+2: Prefer not to say
+3: Prefer to self-describe
+4: Woman
+
+Country (Excerpt)
+55: United States of America
+15: France
+16: Germany
+25: Italy
+54: United Kingdom
+
+
+(Full mappings available in the source code)
+
+🧩 Sample Prediction
+
+Using the model file mc_salary_predict_model.ml:
+
+Input:
+
+age = 7
+gender = 0
+country = 55
+highest_deg = 3
+coding_exp = 4
+title = 13
+company_size = 2
+
+
+Output:
+
+Predicted Salary: $95,679.58
+
+📝 To-Do / Future Improvements
+
+⏳ Add error handling and validation
+
+📊 Add application logging
+
+🔗 Versioned API routing (/api/v1)
+
+☁️ Full Azure deployment
+
+🔐 Authentication layer
